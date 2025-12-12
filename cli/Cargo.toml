@@ -1,1 +1,12 @@
+[package]
+name = "inkverify-cli"
+version = "0.1.0"
+edition = "2021"
 
+[dependencies]
+# Link to the local core folder
+inkverify-core = { path = "../core" }
+
+# We need this to hash the Final Grid at the end
+sha2 = "0.10"
+hex = "0.4"
