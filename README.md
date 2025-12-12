@@ -70,36 +70,28 @@ While InkVerify can be used for password hashing, its most viable industrial app
 ## ⚙️ Implementation Details
 
 ### Requirements
-* **Language:** Python 3.8+ (Prototype), Rust/C++ (Production).
-* **Libraries:** `numpy` (for grid management), `scipy` (for convolution/neighbor detection).
+1.  **The Rust CLI Tool:**
+This project includes a high-performance CLI tool for testing and generating verification proofs manually.
 
-### Usage Pattern
-
-```python
-import numpy as np
-import hashlib
-from engine import CellularAutomataEngine
-
-# 1. Generate the Challenge
-# Combine credentials to form the high-entropy seed
-raw_string = username + password
-seed_hash = hashlib.sha256(raw_string.encode()).digest()
-
-# 2. Seed the Grid
-# Convert hash to a 1024x1024 boolean array (The Memory Hardness)
-initial_grid = generate_grid_from_seed(seed_hash, size=(1024, 1024))
-
-# 3. Run the Work (The "Ink" Expansion)
-# Uses memory-hard cellular automaton rules for t=1000 steps
-final_grid = CellularAutomataEngine.run(initial_grid, steps=1000)
-
-# 4. Verify
-# Check against the stored "Lock" image
-if np.array_equal(final_grid, stored_lock_image):
-    grant_access()
-else:
-    deny_access()
+*Build the project:*
+```Bash
+cargo build --release
 ```
+
+*Run a simulation:*
+```Bash
+# Usage: cargo run --release -- <username> <password> [width] [height] [steps]
+cargo run --release -- Alice MySecretPass 500 500 1000
+```
+
+*Output:*
+* Prints the **SHA-256 Hash** of the final grid.
+* Generates a proof.ppm file visualizing the chaotic state of the memory grid.
+
+## 🏗️ Project Structure
+* **core/:** The pure Rust library containing the Grid memory logic, the Xorshift PRNG, and the Cellular Automaton engine.
+
+* **cli/:** The terminal interface for running simulations and saving .ppm visualizations.
 
 ## 🔮 Future Improvements
 * **3D Expansion:** Moving the simulation to a 3D voxel grid to exponentially increase memory requirements (hardening against GPU attacks).
