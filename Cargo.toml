@@ -1,0 +1,10 @@
+[workspace]
+# This tells Cargo where to find the sub-projects
+members = [
+    "core",
+    "cli"
+]
+
+# Use the version 2 resolver (standard for Rust 2021 edition)
+# This ensures dependencies are calculated correctly across the workspace.
+resolver = "2"
