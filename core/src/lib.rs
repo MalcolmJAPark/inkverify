@@ -3,7 +3,7 @@ pub mod engine;
 
 use wasm_bindgen::prelude::*;
 use sha2::{Sha256, Digest};
-use grid::Grid;
+pub use grid::Grid;
 
 // Re-exports
 pub use engine::{generate_grid_from_seed, run_simulation};
