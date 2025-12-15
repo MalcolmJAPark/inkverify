@@ -1,0 +1,15 @@
+{
+  "name": "inkverify-core",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "inkverify_core_bg.wasm",
+    "inkverify_core.js",
+    "inkverify_core.d.ts"
+  ],
+  "main": "inkverify_core.js",
+  "types": "inkverify_core.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
