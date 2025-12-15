@@ -3,5 +3,12 @@ name = "inkverify-core"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+# "cdylib" creates the .wasm file for the browser.
+# "rlib" allows our CLI tool to still import it as a standard Rust library.
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
-sha2 = "0.10" # The only dependency we need.
+sha2 = "0.10"
+hex = "0.4" # We need this to return a string hash to JS
+wasm-bindgen = "0.2" # The bridge
